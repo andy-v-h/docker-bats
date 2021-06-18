@@ -1,8 +1,6 @@
-FROM alpine:3.5
+FROM alpine:3.14 AS builder
 
 MAINTAINER Luca Corbo <lu.corbo@gmail.com>
-
-WORKDIR /tests
 
 RUN apk --no-cache add \
         bash \
@@ -34,6 +32,13 @@ RUN mkdir -p /usr/local/lib/bats/bats-file \
 
 RUN rm -rf /tmp/*
 
+FROM alpine:3.14
+
+WORKDIR /tests
+
+COPY --from=builder /usr/local /usr/local
 COPY resources/load.bash /usr/local/lib/bats/
+RUN apk --no-cache add \
+        bash
 
 CMD ["/usr/local/bin/bats", "--help"]

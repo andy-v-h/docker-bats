@@ -1,7 +1,7 @@
 .PHONY: build test
 
 NAME=lucor/bats
-VERSION=0.4.0
+VERSION=0.4.1
 
 build:
 	docker build \
@@ -9,5 +9,5 @@ build:
 		--tag $(NAME):$(VERSION) \
 		.
 
-test:
-	docker run --rm -t -v $(CURDIR)/tests:/tests lucor/bats bats /tests/test_image.bats
+test: build
+	docker run --rm -t -v $(CURDIR)/tests:/tests $(NAME) bats /tests/test_image.bats
