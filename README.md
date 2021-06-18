@@ -6,7 +6,7 @@ A lightweight Docker image for [Bash Automated Testing System (bats)](https://gi
 
 It provides:
 
-  - alpine `v3.5`
+  - alpine `v3.14`
   - bats `v0.4.0`
 
 and the following helpers:
